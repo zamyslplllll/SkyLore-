@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyLore - Minecraft Server | Najlepszy Serwer Minecraft</title>
+    <meta name="description" content="Serwer Minecraft SkyLore wkrótce! Dołącz do naszej społeczności Discord i bądź na bieżąco z aktualnościami. Epickie przygody czekają!">
+    <meta name="keywords" content="minecraft, serwer, minecraft server, gaming, survival, creative, multiplayer, skylore">
+    <meta name="author" content="NIrevon">
+    <meta property="og:title" content="SkyLore - Minecraft Server">
+    <meta property="og:description" content="Najlepszy serwer Minecraft SkyLore wkrótce! Dołącz do Discord już teraz!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skylore-minecraft.replit.app">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #00ff88;
+            text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88; }
+            to { text-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #cccccc;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .status {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff4444, #ff6666);
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #333333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.1);
+        }
+
+        .card h2 {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .discord-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #5865f2, #7289da);
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
+        }
+
+        /* Minecraft Creeper Pixel Art */
+        .creeper {
+            width: 120px;
+            height: 150px;
+            margin: 20px auto;
+            position: relative;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .creeper-head {
+            width: 80px;
+            height: 80px;
+            background: #4a7c2e;
+            margin: 0 auto 10px;
+            position: relative;
+            border: 2px solid #2d4a1c;
+        }
+
+        .creeper-eye {
+            width: 8px;
+            height: 8px;
+            background: #000000;
+            position: absolute;
+            top: 20px;
+        }
+
+        .creeper-eye.left { left: 20px; }
+        .creeper-eye.right { right: 20px; }
+
+        .creeper-mouth {
+            width: 8px;
+            height: 24px;
+            background: #000000;
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .creeper-mouth::before {
+            content: '';
+            width: 24px;
+            height: 8px;
+            background: #000000;
+            position: absolute;
+            top: 8px;
+            left: -8px;
+        }
+
+        .creeper-body {
+            width: 60px;
+            height: 60px;
+            background: #4a7c2e;
+            margin: 0 auto;
+            border: 2px solid #2d4a1c;
+        }
+
+        .creeper:hover {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #111111;
+            margin-top: 60px;
+            border-top: 1px solid #333333;
+        }
+
+        footer p {
+            color: #888888;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            header {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <header>
+        <h1 class="logo">SkyLore</h1>
+        <p class="subtitle">Minecraft Server</p>
+        <span class="status">WKRÓTCE <span class="loading"></span></span>
+    </header>
+
+    <div class="container">
+        <div class="content-grid">
+            <div class="card">
+                <h2>🎮 O Serwerze</h2>
+                <p>SkyLore to wyjątkowy serwer Minecraft, gdzie czekają na Ciebie niesamowite przygody! Przygotowujemy coś specjalnego dla wszystkich miłośników gry.</p>
+                <p>Bądź częścią naszej społeczności i nie przegap startu serwera!</p>
+                <div class="creeper"></div>
+            </div>
+
+            <div class="card">
+                <h2>💬 Dołącz do Discord</h2>
+                <p>Społeczność SkyLore już czeka na Ciebie! Dołącz do naszego serwera Discord, aby być na bieżąco z wszystkimi aktualnościami.</p>
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://discord.gg/YTZAvWFW2S" class="discord-link" target="_blank">
+                        Dołącz do Discord
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📞 Kontakt</h2>
+                <p><strong>Administrator:</strong> NIrevon</p>
+                <p><strong>Email:</strong> nirevon@kontakt.com</p>
+                <p><strong>Discord:</strong> NIrevon</p>
+                <p>Masz pytania? Skontaktuj się z nami!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SkyLore Minecraft Server</p>
+        <p>Strona stworzona z pasją dla społeczności Minecraft 🎮</p>
+    </footer>
+
+    <script>
+        // Create animated particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Create Creeper pixel art
+        function createCreeper() {
+            const creeper = document.querySelector('.creeper');
+            
+            // Create head
+            const head = document.createElement('div');
+            head.classList.add('creeper-head');
+            
+            // Create eyes
+            const leftEye = document.createElement('div');
+            leftEye.classList.add('creeper-eye', 'left');
+            const rightEye = document.createElement('div');
+            rightEye.classList.add('creeper-eye', 'right');
+            
+            // Create mouth
+            const mouth = document.createElement('div');
+            mouth.classList.add('creeper-mouth');
+            
+            head.appendChild(leftEye);
+            head.appendChild(rightEye);
+            head.appendChild(mouth);
+            
+            // Create body
+            const body = document.createElement('div');
+            body.classList.add('creeper-body');
+            
+            creeper.appendChild(head);
+            creeper.appendChild(body);
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createCreeper();
+        });
+    </script>
+</body>
+</html
