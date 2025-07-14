@@ -28,7 +28,207 @@
             overflow-x: hidden;
         }
 
-        /* Animated background particles */
+        /* Auth Buttons */
+        .auth-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #000;
+        }
+
+        .register-btn {
+            background: linear-gradient(45deg, #5865f2, #7289da);
+            color: #fff;
+        }
+
+        .recruitment-btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #fff;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid #00ff88;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .close:hover {
+            color: #00ff88;
+        }
+
+        .modal h2 {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cccccc;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            margin-top: 20px;
+        }
+
+        .question {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question h4 {
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .question label:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .question input[type="radio"] {
+            margin-right: 10px;
+            width: auto;
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .quiz-pass {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 204, 106, 0.2));
+            border: 2px solid #00ff88;
+        }
+
+        .quiz-fail {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.2), rgba(255, 100, 100, 0.2));
+            border: 2px solid #ff4444;
+        }
+
+        /* Main Styles */
         .particles {
             position: fixed;
             top: 0;
@@ -41,57 +241,50 @@
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00ff88;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
         }
 
-        /* Header */
         header {
             text-align: center;
-            padding: 100px 20px;
+            padding: 100px 20px 50px;
             position: relative;
-            z-index: 10;
+            z-index: 2;
         }
 
         .logo {
             font-family: 'Orbitron', monospace;
-            font-size: 4rem;
+            font-size: 4em;
             font-weight: 900;
-            color: #00ff88;
-            text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
-            animation: glow 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, #00ff88, #00cc6a, #5865f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88; }
-            to { text-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88; }
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
         }
 
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.5em;
             color: #cccccc;
             margin-bottom: 30px;
-            font-weight: 300;
         }
 
         .status {
             display: inline-block;
-            background: linear-gradient(45deg, #ff4444, #ff6666);
-            color: #ffffff;
             padding: 15px 30px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             border-radius: 25px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -104,206 +297,189 @@
             display: inline-block;
             width: 8px;
             height: 8px;
-            border: 2px solid #ffffff;
-            border-top: 2px solid transparent;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            background: #ffffff;
+            animation: blink 1s ease-in-out infinite;
             margin-left: 10px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
-        /* Main content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
-            z-index: 10;
+            z-index: 2;
         }
 
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
 
         .card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             padding: 30px;
-            border: 1px solid #333333;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
         }
 
         .card h2 {
             color: #00ff88;
             font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
             margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .visitor-counter {
-            background: linear-gradient(45deg, #333333, #444444);
-            border-radius: 25px;
-            padding: 15px 25px;
-            margin: 20px auto;
-            text-align: center;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-        }
-
-        .visitor-counter h3 {
-            color: #00ff88;
-            font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .visitor-count {
-            color: #ffffff;
-            font-size: 2rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ff88;
         }
 
         .card p {
-            color: #cccccc;
             line-height: 1.6;
-            margin-bottom: 20px;
+            color: #cccccc;
+            margin-bottom: 15px;
         }
 
         .discord-link {
             display: inline-block;
+            padding: 15px 30px;
             background: linear-gradient(45deg, #5865f2, #7289da);
             color: #ffffff;
-            padding: 15px 30px;
-            border-radius: 25px;
             text-decoration: none;
-            font-weight: 500;
+            border-radius: 25px;
+            font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
         }
 
         .discord-link:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
         }
 
-        /* Minecraft Creeper Pixel Art */
+        /* Creeper Animation */
         .creeper {
-            width: 120px;
-            height: 150px;
+            width: 60px;
+            height: 80px;
             margin: 20px auto;
             position: relative;
-            animation: bounce 3s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
         }
 
         .creeper-head {
-            width: 80px;
-            height: 80px;
-            background: #4a7c2e;
-            margin: 0 auto 10px;
+            width: 60px;
+            height: 60px;
+            background: #4a9d3e;
             position: relative;
-            border: 2px solid #2d4a1c;
+            border-radius: 5px;
         }
 
         .creeper-eye {
             width: 8px;
             height: 8px;
-            background: #000000;
+            background: #000;
             position: absolute;
-            top: 20px;
+            top: 15px;
         }
 
-        .creeper-eye.left { left: 20px; }
-        .creeper-eye.right { right: 20px; }
+        .creeper-eye.left { left: 15px; }
+        .creeper-eye.right { right: 15px; }
 
         .creeper-mouth {
-            width: 8px;
-            height: 24px;
-            background: #000000;
+            width: 4px;
+            height: 20px;
+            background: #000;
             position: absolute;
-            top: 35px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        .creeper-mouth::before {
-            content: '';
-            width: 24px;
-            height: 8px;
-            background: #000000;
-            position: absolute;
-            top: 8px;
-            left: -8px;
-        }
-
         .creeper-body {
             width: 60px;
-            height: 60px;
-            background: #4a7c2e;
-            margin: 0 auto;
-            border: 2px solid #2d4a1c;
+            height: 20px;
+            background: #4a9d3e;
+            margin-top: 5px;
+            border-radius: 0 0 5px 5px;
         }
 
-        .creeper:hover {
-            animation: shake 0.5s ease-in-out infinite;
+        /* Visitor Counter */
+        .visitor-counter {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-2px); }
-            75% { transform: translateX(2px); }
+        .visitor-counter h3 {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 20px;
         }
 
-        /* Footer */
+        .visitor-count {
+            font-size: 3em;
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
         footer {
             text-align: center;
-            padding: 40px 20px;
-            background: #111111;
-            margin-top: 60px;
-            border-top: 1px solid #333333;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
         }
 
         footer p {
-            color: #888888;
+            color: #cccccc;
             margin-bottom: 10px;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .logo {
-                font-size: 2.5rem;
+                font-size: 2.5em;
             }
             
             .content-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
             }
             
-            .card {
+            .auth-section {
+                flex-direction: column;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .modal-content {
+                margin: 10px;
                 padding: 20px;
-            }
-            
-            header {
-                padding: 60px 20px;
+                width: calc(100% - 20px);
             }
         }
     </style>
@@ -311,143 +487,125 @@
 <body>
     <div class="particles"></div>
     
-    <header>
-        <h1 class="logo">SkyLore</h1>
-        <p class="subtitle">Minecraft Server</p>
-        <span class="status">WKRÓTCE <span class="loading"></span></span>
-    </header>
+    <!-- Auth Section -->
+    <div class="auth-section" id="authSection">
+        <button class="auth-btn login-btn" onclick="openModal('loginModal')">Logowanie</button>
+        <button class="auth-btn register-btn" onclick="openModal('registerModal')">Rejestracja</button>
+        <button class="auth-btn recruitment-btn" onclick="openModal('recruitmentModal')">Rekrutacja Admin</button>
+    </div>
 
-    <div class="container">
-        <div class="content-grid">
-            <div class="card">
-                <h2>🎮 O Serwerze</h2>
-                <p>SkyLore to wyjątkowy serwer Minecraft, gdzie czekają na Ciebie niesamowite przygody! Przygotowujemy coś specjalnego dla wszystkich miłośników gry.</p>
-                <p>Bądź częścią naszej społeczności i nie przegap startu serwera!</p>
-                <div class="creeper"></div>
-            </div>
+    <!-- User Section (when logged in) -->
+    <div class="auth-section" id="userSection" style="display: none;">
+        <span id="welcomeText" style="color: #00ff88; margin-right: 15px; font-weight: 500;"></span>
+        <button class="auth-btn register-btn" onclick="logout()">Wyloguj</button>
+        <button class="auth-btn recruitment-btn" onclick="openModal('recruitmentModal')">Rekrutacja Admin</button>
+    </div>
 
-            <div class="card">
-                <h2>💬 Dołącz do Discord</h2>
-                <p>Społeczność SkyLore już czeka na Ciebie! Dołącz do naszego serwera Discord, aby być na bieżąco z wszystkimi aktualnościami.</p>
-                <div style="text-align: center; margin-top: 25px;">
-                    <a href="https://discord.gg/YTZAvWFW2S" class="discord-link" target="_blank">
-                        Dołącz do Discord
-                    </a>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Logowanie</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Nazwa użytkownika:</label>
+                    <input type="text" id="loginUsername" name="username" required>
                 </div>
-            </div>
-
-            <div class="card">
-                <h2>📞 Kontakt</h2>
-                <p><strong>Administrator:</strong> NIrevon</p>
-                <p><strong>Email:</strong> nirevonkontakt@gmail.com</p>
-                <p><strong>Discord:</strong> NIrevon</p>
-                <p>Masz pytania? Skontaktuj się z nami!</p>
-            </div>
-        </div>
-
-        <div class="visitor-counter">
-            <h3>👥 Aktywność Strony</h3>
-            <div class="visitor-count" id="visitorCount">0</div>
-            <p style="color: #cccccc; margin-top: 10px;">odwiedzin łącznie</p>
+                <div class="form-group">
+                    <label for="loginPassword">Hasło:</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit" class="submit-btn">Zaloguj się</button>
+            </form>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 SkyLore Minecraft Server</p>
-        <p>Strona stworzona z pasją dla społeczności Minecraft 🎮</p>
-    </footer>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Rejestracja</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Nazwa użytkownika:</label>
+                    <input type="text" id="registerUsername" name="username" required minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Hasło:</label>
+                    <input type="password" id="registerPassword" name="password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Potwierdź hasło:</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Zarejestruj się</button>
+            </form>
+        </div>
+    </div>
 
-    <script>
-        // Create animated particles
-        function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
+    <!-- Recruitment Modal -->
+    <div id="recruitmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('recruitmentModal')">&times;</span>
+            <h2>Rekrutacja na Admina Discord</h2>
+            <p style="color: #cccccc; text-align: center; margin-bottom: 20px;">
+                Wypełnij formularz i przejdź test, aby zostać administratorem naszego serwera Discord!
+            </p>
             
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
+            <form id="recruitmentForm">
+                <div class="form-group">
+                    <label for="recruitName">Imię i nazwisko:</label>
+                    <input type="text" id="recruitName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="recruitAge">Wiek:</label>
+                    <input type="number" id="recruitAge" name="age" min="13" max="99" required>
+                </div>
+                <div class="form-group">
+                    <label for="recruitDiscord">Discord tag:</label>
+                    <input type="text" id="recruitDiscord" name="discord" placeholder="TwojNick#1234" required>
+                </div>
+                <div class="form-group">
+                    <label for="recruitExperience">Doświadczenie z Discord/moderacją:</label>
+                    <textarea id="recruitExperience" name="experience" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recruitMotivation">Dlaczego chcesz zostać adminem?</label>
+                    <textarea id="recruitMotivation" name="motivation" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recruitAvailability">Dostępność (ile godzin dziennie):</label>
+                    <select id="recruitAvailability" name="availability" required>
+                        <option value="">Wybierz...</option>
+                        <option value="1-2h">1-2 godziny</option>
+                        <option value="3-4h">3-4 godziny</option>
+                        <option value="5-6h">5-6 godzin</option>
+                        <option value="7+h">7+ godzin</option>
+                    </select>
+                </div>
                 
-                // Random position
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
+                <h3 style="color: #00ff88; text-align: center; margin: 30px 0 20px 0;">Test wiedzy o moderacji Discord</h3>
                 
-                // Random animation delay
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
+                <div class="quiz-container">
+                    <div class="question">
+                        <h4>1. Co to jest raid na serwerze Discord?</h4>
+                        <label><input type="radio" name="q1" value="a"> Organizowane wydarzenie dla graczy</label>
+                        <label><input type="radio" name="q1" value="b"> Skoordynowany atak na serwer przez wiele osób</label>
+                        <label><input type="radio" name="q1" value="c"> Funkcja Discord do tworzenia grup</label>
+                        <label><input type="radio" name="q1" value="d"> Rodzaj bota Discord</label>
+                    </div>
 
-        // Create Creeper pixel art
-        function createCreeper() {
-            const creeper = document.querySelector('.creeper');
-            
-            // Create head
-            const head = document.createElement('div');
-            head.classList.add('creeper-head');
-            
-            // Create eyes
-            const leftEye = document.createElement('div');
-            leftEye.classList.add('creeper-eye', 'left');
-            const rightEye = document.createElement('div');
-            rightEye.classList.add('creeper-eye', 'right');
-            
-            // Create mouth
-            const mouth = document.createElement('div');
-            mouth.classList.add('creeper-mouth');
-            
-            head.appendChild(leftEye);
-            head.appendChild(rightEye);
-            head.appendChild(mouth);
-            
-            // Create body
-            const body = document.createElement('div');
-            body.classList.add('creeper-body');
-            
-            creeper.appendChild(head);
-            creeper.appendChild(body);
-        }
+                    <div class="question">
+                        <h4>2. Które z poniższych uprawnień pozwala usuwać wiadomości innych użytkowników?</h4>
+                        <label><input type="radio" name="q2" value="a"> Send Messages</label>
+                        <label><input type="radio" name="q2" value="b"> Manage Messages</label>
+                        <label><input type="radio" name="q2" value="c"> Read Message History</label>
+                        <label><input type="radio" name="q2" value="d"> Embed Links</label>
+                    </div>
 
-        // Visitor counter functionality
-        function initVisitorCounter() {
-            const totalVisitorsKey = 'skylore_total_visitors';
-            
-            // Get total visitors
-            let totalVisitors = parseInt(localStorage.getItem(totalVisitorsKey) || '0');
-            
-            // Check if this is a new visit (using session storage)
-            if (!sessionStorage.getItem('skylore_visited_ever')) {
-                totalVisitors += 1;
-                localStorage.setItem(totalVisitorsKey, totalVisitors.toString());
-                sessionStorage.setItem('skylore_visited_ever', 'true');
-            }
-            
-            // Display the count with animation
-            const countElement = document.getElementById('visitorCount');
-            if (countElement) {
-                animateCounter(countElement, totalVisitors);
-            }
-        }
-        
-        function animateCounter(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current);
-            }, 30);
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            createCreeper();
-            initVisitorCounter();
-        });
-    </script>
-</body>
-</html>
+                    <div class="question">
+                        <h4
