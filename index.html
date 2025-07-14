@@ -154,6 +154,30 @@
             text-align: center;
         }
 
+        .visitor-counter {
+            background: linear-gradient(45deg, #333333, #444444);
+            border-radius: 25px;
+            padding: 15px 25px;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .visitor-counter h3 {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .visitor-count {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
         .card p {
             color: #cccccc;
             line-height: 1.6;
@@ -320,6 +344,12 @@
                 <p>Masz pytania? Skontaktuj się z nami!</p>
             </div>
         </div>
+
+        <div class="visitor-counter">
+            <h3>👥 Aktywność Strony</h3>
+            <div class="visitor-count" id="visitorCount">0</div>
+            <p style="color: #cccccc; margin-top: 10px;">odwiedzin dzisiaj</p>
+        </div>
     </div>
 
     <footer>
@@ -378,10 +408,52 @@
             creeper.appendChild(body);
         }
 
+        // Visitor counter functionality
+        function initVisitorCounter() {
+            const today = new Date().toDateString();
+            const visitorKey = 'skylore_visitors_' + today;
+            const totalVisitorsKey = 'skylore_total_visitors';
+            
+            // Get today's visitors
+            let todayVisitors = parseInt(localStorage.getItem(visitorKey) || '0');
+            
+            // Check if this is a new visit (using session storage)
+            if (!sessionStorage.getItem('skylore_visited_today')) {
+                todayVisitors += 1;
+                localStorage.setItem(visitorKey, todayVisitors.toString());
+                sessionStorage.setItem('skylore_visited_today', 'true');
+                
+                // Update total visitors
+                let totalVisitors = parseInt(localStorage.getItem(totalVisitorsKey) || '0');
+                totalVisitors += 1;
+                localStorage.setItem(totalVisitorsKey, totalVisitors.toString());
+            }
+            
+            // Display the count with animation
+            const countElement = document.getElementById('visitorCount');
+            if (countElement) {
+                animateCounter(countElement, todayVisitors);
+            }
+        }
+        
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 30);
+        }
+
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
             createCreeper();
+            initVisitorCounter();
         });
     </script>
 </body>
