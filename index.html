@@ -348,7 +348,7 @@
         <div class="visitor-counter">
             <h3>👥 Aktywność Strony</h3>
             <div class="visitor-count" id="visitorCount">0</div>
-            <p style="color: #cccccc; margin-top: 10px;">odwiedzin dzisiaj</p>
+            <p style="color: #cccccc; margin-top: 10px;">odwiedzin łącznie</p>
         </div>
     </div>
 
@@ -410,29 +410,22 @@
 
         // Visitor counter functionality
         function initVisitorCounter() {
-            const today = new Date().toDateString();
-            const visitorKey = 'skylore_visitors_' + today;
             const totalVisitorsKey = 'skylore_total_visitors';
             
-            // Get today's visitors
-            let todayVisitors = parseInt(localStorage.getItem(visitorKey) || '0');
+            // Get total visitors
+            let totalVisitors = parseInt(localStorage.getItem(totalVisitorsKey) || '0');
             
             // Check if this is a new visit (using session storage)
-            if (!sessionStorage.getItem('skylore_visited_today')) {
-                todayVisitors += 1;
-                localStorage.setItem(visitorKey, todayVisitors.toString());
-                sessionStorage.setItem('skylore_visited_today', 'true');
-                
-                // Update total visitors
-                let totalVisitors = parseInt(localStorage.getItem(totalVisitorsKey) || '0');
+            if (!sessionStorage.getItem('skylore_visited_ever')) {
                 totalVisitors += 1;
                 localStorage.setItem(totalVisitorsKey, totalVisitors.toString());
+                sessionStorage.setItem('skylore_visited_ever', 'true');
             }
             
             // Display the count with animation
             const countElement = document.getElementById('visitorCount');
             if (countElement) {
-                animateCounter(countElement, todayVisitors);
+                animateCounter(countElement, totalVisitors);
             }
         }
         
