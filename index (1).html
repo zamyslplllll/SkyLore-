@@ -1,0 +1,1495 @@
+<!doctype html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SkyLore - Minecraft Server | Najlepszy Serwer Minecraft</title>
+        <meta
+            name="description"
+            content="Serwer Minecraft SkyLore wkrótce! Dołącz do naszej społeczności Discord i bądź na bieżąco z aktualnościami. Epickie przygody czekają!"
+        />
+        <meta
+            name="keywords"
+            content="minecraft, serwer, minecraft server, gaming, survival, creative, multiplayer, skylore"
+        />
+        <meta name="author" content="NIrevon" />
+        <meta property="og:title" content="SkyLore - Minecraft Server" />
+        <meta
+            property="og:description"
+            content="Najlepszy serwer Minecraft SkyLore wkrótce! Dołącz do Discord już teraz!"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://skylore-minecraft.replit.app"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Roboto", sans-serif;
+                background: linear-gradient(
+                    135deg,
+                    #0a0a0a 0%,
+                    #1a1a1a 50%,
+                    #2a2a2a 100%
+                );
+                min-height: 100vh;
+                color: #ffffff;
+                overflow-x: hidden;
+            }
+
+            /* Auth Buttons */
+            .auth-section {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .auth-btn {
+                padding: 12px 24px;
+                border: none;
+                border-radius: 25px;
+                font-family: "Orbitron", monospace;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+                text-align: center;
+                min-width: 140px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .login-btn {
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+                color: #000;
+            }
+
+            .register-btn {
+                background: linear-gradient(45deg, #5865f2, #7289da);
+                color: #fff;
+            }
+
+            .recruitment-btn {
+                background: linear-gradient(45deg, #ff6b35, #f7931e);
+                color: #fff;
+            }
+
+            .auth-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
+            }
+
+            .auth-btn:active {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            }
+
+            /* Modal Styles */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(5px);
+            }
+
+            .modal-content {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+                margin: 5% auto;
+                padding: 30px;
+                border: 2px solid #00ff88;
+                border-radius: 20px;
+                width: 90%;
+                max-width: 500px;
+                position: relative;
+                box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
+
+            .close:hover {
+                color: #00ff88;
+            }
+
+            .modal h2 {
+                color: #00ff88;
+                font-family: "Orbitron", monospace;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                color: #cccccc;
+                font-weight: 500;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                padding: 12px;
+                border: 2px solid #333;
+                border-radius: 8px;
+                background: #1a1a1a;
+                color: #ffffff;
+                font-size: 14px;
+                transition: border-color 0.3s ease;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus,
+            .form-group select:focus {
+                outline: none;
+                border-color: #00ff88;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+                color: #000;
+                border: none;
+                border-radius: 8px;
+                font-family: "Orbitron", monospace;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 20px;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+            }
+
+            .submit-btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            /* Quiz Styles */
+            .quiz-container {
+                margin-top: 20px;
+            }
+
+            .question {
+                background: rgba(255, 255, 255, 0.05);
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+
+            .question h4 {
+                color: #00ff88;
+                margin-bottom: 15px;
+                font-size: 16px;
+            }
+
+            .question label {
+                display: block;
+                margin-bottom: 10px;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 5px;
+                transition: background 0.3s ease;
+            }
+
+            .question label:hover {
+                background: rgba(0, 255, 136, 0.1);
+            }
+
+            .question input[type="radio"] {
+                margin-right: 10px;
+                width: auto;
+            }
+
+            .quiz-result {
+                text-align: center;
+                padding: 30px;
+                border-radius: 15px;
+                margin-top: 20px;
+            }
+
+            .quiz-pass {
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 255, 136, 0.2),
+                    rgba(0, 204, 106, 0.2)
+                );
+                border: 2px solid #00ff88;
+            }
+
+            .quiz-fail {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 68, 68, 0.2),
+                    rgba(255, 100, 100, 0.2)
+                );
+                border: 2px solid #ff4444;
+            }
+
+            /* Main Styles */
+            .particles {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .particle {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+                border-radius: 50%;
+                animation: float 6s ease-in-out infinite;
+            }
+
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translateY(0px) rotate(0deg);
+                    opacity: 1;
+                }
+                50% {
+                    transform: translateY(-20px) rotate(180deg);
+                    opacity: 0.5;
+                }
+            }
+
+            header {
+                text-align: center;
+                padding: 120px 20px 80px;
+                position: relative;
+                z-index: 2;
+                background: radial-gradient(
+                    circle at center,
+                    rgba(0, 255, 136, 0.1) 0%,
+                    transparent 70%
+                );
+            }
+
+            .logo {
+                font-family: "Orbitron", monospace;
+                font-size: 4.5em;
+                font-weight: 900;
+                background: linear-gradient(
+                    45deg,
+                    #00ff88,
+                    #00cc6a,
+                    #5865f2,
+                    #ff6b35
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 25px;
+                text-shadow: 0 0 40px rgba(0, 255, 136, 0.7);
+                animation: logoGlow 3s ease-in-out infinite alternate;
+            }
+
+            @keyframes logoGlow {
+                0% {
+                    filter: brightness(1);
+                }
+                100% {
+                    filter: brightness(1.2);
+                }
+            }
+
+            .subtitle {
+                font-size: 1.5em;
+                color: #cccccc;
+                margin-bottom: 30px;
+            }
+
+            .status {
+                display: inline-block;
+                padding: 15px 30px;
+                background: linear-gradient(45deg, #ff6b35, #f7931e);
+                border-radius: 25px;
+                font-family: "Orbitron", monospace;
+                font-weight: 700;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
+
+            .loading {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #ffffff;
+                animation: blink 1s ease-in-out infinite;
+                margin-left: 10px;
+            }
+
+            @keyframes blink {
+                0%,
+                50% {
+                    opacity: 1;
+                }
+                51%,
+                100% {
+                    opacity: 0;
+                }
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .content-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+
+            .card {
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(0, 255, 136, 0.2);
+                border-radius: 25px;
+                padding: 35px;
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            }
+
+            .card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(45deg, #00ff88, #00cc6a);
+            }
+
+            .card:hover {
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 25px 50px rgba(0, 255, 136, 0.3);
+                border-color: rgba(0, 255, 136, 0.4);
+            }
+
+            .card h2 {
+                color: #00ff88;
+                font-family: "Orbitron", monospace;
+                margin-bottom: 20px;
+            }
+
+            .card p {
+                line-height: 1.6;
+                color: #cccccc;
+                margin-bottom: 15px;
+            }
+
+            .discord-link {
+                display: inline-block;
+                padding: 15px 30px;
+                background: linear-gradient(45deg, #5865f2, #7289da);
+                color: #ffffff;
+                text-decoration: none;
+                border-radius: 25px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .discord-link:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+            }
+
+            /* Creeper Animation */
+            .creeper {
+                width: 60px;
+                height: 80px;
+                margin: 20px auto;
+                position: relative;
+            }
+
+            .creeper-head {
+                width: 60px;
+                height: 60px;
+                background: #4a9d3e;
+                position: relative;
+                border-radius: 5px;
+            }
+
+            .creeper-eye {
+                width: 8px;
+                height: 8px;
+                background: #000;
+                position: absolute;
+                top: 15px;
+            }
+
+            .creeper-eye.left {
+                left: 15px;
+            }
+            .creeper-eye.right {
+                right: 15px;
+            }
+
+            .creeper-mouth {
+                width: 4px;
+                height: 20px;
+                background: #000;
+                position: absolute;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .creeper-body {
+                width: 60px;
+                height: 20px;
+                background: #4a9d3e;
+                margin-top: 5px;
+                border-radius: 0 0 5px 5px;
+            }
+
+            /* Visitor Counter */
+            .visitor-counter {
+                text-align: center;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                padding: 30px;
+                margin-bottom: 50px;
+            }
+
+            .visitor-counter h3 {
+                color: #00ff88;
+                font-family: "Orbitron", monospace;
+                margin-bottom: 20px;
+            }
+
+            .visitor-count {
+                font-size: 3em;
+                font-family: "Orbitron", monospace;
+                font-weight: 900;
+                color: #ffffff;
+                text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            }
+
+            footer {
+                text-align: center;
+                padding: 50px 20px;
+                background: rgba(0, 0, 0, 0.8);
+                margin-top: 50px;
+                position: relative;
+                z-index: 2;
+            }
+
+            footer p {
+                color: #cccccc;
+                margin-bottom: 10px;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .logo {
+                    font-size: 2.5em;
+                }
+
+                .content-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .auth-section {
+                    position: fixed;
+                    top: 15px;
+                    right: 15px;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+
+                .auth-btn {
+                    padding: 10px 18px;
+                    font-size: 12px;
+                    min-width: 120px;
+                }
+
+                .modal-content {
+                    margin: 10px;
+                    padding: 20px;
+                    width: calc(100% - 20px);
+                    max-height: 85vh;
+                }
+
+                header {
+                    padding: 80px 20px 40px;
+                }
+
+                .particles {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="particles"></div>
+
+        <!-- Auth Section -->
+        <div class="auth-section" id="authSection">
+            <button
+                class="auth-btn login-btn"
+                onclick="openModal('loginModal')"
+            >
+                Logowanie
+            </button>
+            <button
+                class="auth-btn register-btn"
+                onclick="openModal('registerModal')"
+            >
+                Rejestracja
+            </button>
+            <button
+                class="auth-btn recruitment-btn"
+                onclick="openModal('recruitmentModal')"
+            >
+                Rekrutacja Admin
+            </button>
+        </div>
+
+        <!-- User Section (when logged in) -->
+        <div class="auth-section" id="userSection" style="display: none">
+            <span
+                id="welcomeText"
+                style="color: #00ff88; margin-right: 15px; font-weight: 500"
+            ></span>
+            <button class="auth-btn register-btn" onclick="logout()">
+                Wyloguj
+            </button>
+            <button
+                class="auth-btn recruitment-btn"
+                onclick="openModal('recruitmentModal')"
+            >
+                Rekrutacja Admin
+            </button>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('loginModal')"
+                    >&times;</span
+                >
+                <h2>Logowanie</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">Nazwa użytkownika:</label>
+                        <input
+                            type="text"
+                            id="loginUsername"
+                            name="username"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Hasło:</label>
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Zaloguj się
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div id="registerModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('registerModal')"
+                    >&times;</span
+                >
+                <h2>Rejestracja</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerUsername">Nazwa użytkownika:</label>
+                        <input
+                            type="text"
+                            id="registerUsername"
+                            name="username"
+                            required
+                            minlength="3"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            name="email"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Hasło:</label>
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            name="password"
+                            required
+                            minlength="6"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword"
+                            >Potwierdź hasło:</label
+                        >
+                        <input
+                            type="password"
+                            id="registerConfirmPassword"
+                            name="confirmPassword"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Zarejestruj się
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recruitment Modal -->
+        <div id="recruitmentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('recruitmentModal')"
+                    >&times;</span
+                >
+                <h2>Rekrutacja na Admina Discord</h2>
+                <p
+                    style="
+                        color: #cccccc;
+                        text-align: center;
+                        margin-bottom: 20px;
+                    "
+                >
+                    Wypełnij formularz i przejdź test, aby zostać
+                    administratorem naszego serwera Discord!
+                </p>
+
+                <form id="recruitmentForm">
+                    <div class="form-group">
+                        <label for="recruitName">Imię i nazwisko:</label>
+                        <input
+                            type="text"
+                            id="recruitName"
+                            name="name"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitAge">Wiek:</label>
+                        <input
+                            type="number"
+                            id="recruitAge"
+                            name="age"
+                            min="13"
+                            max="99"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitDiscord">Discord tag:</label>
+                        <input
+                            type="text"
+                            id="recruitDiscord"
+                            name="discord"
+                            placeholder="TwojNick#1234"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitExperience"
+                            >Doświadczenie z Discord/moderacją:</label
+                        >
+                        <textarea
+                            id="recruitExperience"
+                            name="experience"
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitMotivation"
+                            >Dlaczego chcesz zostać adminem?</label
+                        >
+                        <textarea
+                            id="recruitMotivation"
+                            name="motivation"
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitAvailability"
+                            >Dostępność (ile godzin dziennie):</label
+                        >
+                        <select
+                            id="recruitAvailability"
+                            name="availability"
+                            required
+                        >
+                            <option value="">Wybierz...</option>
+                            <option value="1-2h">1-2 godziny</option>
+                            <option value="3-4h">3-4 godziny</option>
+                            <option value="5-6h">5-6 godzin</option>
+                            <option value="7+h">7+ godzin</option>
+                        </select>
+                    </div>
+
+                    <h3
+                        style="
+                            color: #00ff88;
+                            text-align: center;
+                            margin: 30px 0 20px 0;
+                        "
+                    >
+                        Test wiedzy o moderacji Discord
+                    </h3>
+
+                    <div class="quiz-container">
+                        <div class="question">
+                            <h4>1. Co to jest raid na serwerze Discord?</h4>
+                            <label
+                                ><input type="radio" name="q1" value="a" />
+                                Organizowane wydarzenie dla graczy</label
+                            >
+                            <label
+                                ><input type="radio" name="q1" value="b" />
+                                Skoordynowany atak na serwer przez wiele
+                                osób</label
+                            >
+                            <label
+                                ><input type="radio" name="q1" value="c" />
+                                Funkcja Discord do tworzenia grup</label
+                            >
+                            <label
+                                ><input type="radio" name="q1" value="d" />
+                                Rodzaj bota Discord</label
+                            >
+                        </div>
+
+                        <div class="question">
+                            <h4>
+                                2. Które z poniższych uprawnień pozwala usuwać
+                                wiadomości innych użytkowników?
+                            </h4>
+                            <label
+                                ><input type="radio" name="q2" value="a" /> Send
+                                Messages</label
+                            >
+                            <label
+                                ><input type="radio" name="q2" value="b" />
+                                Manage Messages</label
+                            >
+                            <label
+                                ><input type="radio" name="q2" value="c" /> Read
+                                Message History</label
+                            >
+                            <label
+                                ><input type="radio" name="q2" value="d" />
+                                Embed Links</label
+                            >
+                        </div>
+
+                        <div class="question">
+                            <h4>3. Co oznacza "mute" użytkownika?</h4>
+                            <label
+                                ><input type="radio" name="q3" value="a" />
+                                Całkowite usunięcie z serwera</label
+                            >
+                            <label
+                                ><input type="radio" name="q3" value="b" />
+                                Czasowe odebranie możliwości pisania</label
+                            >
+                            <label
+                                ><input type="radio" name="q3" value="c" />
+                                Zmiana nicku użytkownika</label
+                            >
+                            <label
+                                ><input type="radio" name="q3" value="d" />
+                                Przeniesienie na inny kanał</label
+                            >
+                        </div>
+
+                        <div class="question">
+                            <h4>
+                                4. Która komenda bota moderacyjnego służy do
+                                banowania użytkownika?
+                            </h4>
+                            <label
+                                ><input type="radio" name="q4" value="a" />
+                                !kick</label
+                            >
+                            <label
+                                ><input type="radio" name="q4" value="b" />
+                                !ban</label
+                            >
+                            <label
+                                ><input type="radio" name="q4" value="c" />
+                                !remove</label
+                            >
+                            <label
+                                ><input type="radio" name="q4" value="d" />
+                                !delete</label
+                            >
+                        </div>
+
+                        <div class="question">
+                            <h4>5. Co to są "role" na Discord?</h4>
+                            <label
+                                ><input type="radio" name="q5" value="a" />
+                                Różne kanały tekstowe</label
+                            >
+                            <label
+                                ><input type="radio" name="q5" value="b" />
+                                Grupy użytkowników z określonymi
+                                uprawnieniami</label
+                            >
+                            <label
+                                ><input type="radio" name="q5" value="c" />
+                                Rodzaje emotikon</label
+                            >
+                            <label
+                                ><input type="radio" name="q5" value="d" />
+                                Ustawienia powiadomień</label
+                            >
+                        </div>
+
+                        <div class="question">
+                            <h4>
+                                6. Jak długo trwa "timeout" użytkownika
+                                maksymalnie?
+                            </h4>
+                            <label
+                                ><input type="radio" name="q6" value="a" /> 1
+                                godzina</label
+                            >
+                            <label
+                                ><input type="radio" name="q6" value="b" /> 24
+                                godziny</label
+                            >
+                            <label
+                                ><input type="radio" name="q6" value="c" /> 28
+                                dni</label
+                            >
+                            <label
+                                ><input type="radio" name="q6" value="d" />
+                                Bezterminowo</label
+                            >
+                        </div>
+
+                        <div class="question">
+                            <h4>
+                                7. Co należy zrobić w pierwszej kolejności przy
+                                spamie na kanale?
+                            </h4>
+                            <label
+                                ><input type="radio" name="q7" value="a" />
+                                Zbanować użytkownika na stałe</label
+                            >
+                            <label
+                                ><input type="radio" name="q7" value="b" />
+                                Usunąć spam i ostrzec użytkownika</label
+                            >
+                            <label
+                                ><input type="radio" name="q7" value="c" />
+                                Zignorować sytuację</label
+                            >
+                            <label
+                                ><input type="radio" name="q7" value="d" />
+                                Przenieść na inny kanał</label
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Wyślij aplikację
+                    </button>
+                </form>
+
+                <div id="quizResult" style="display: none"></div>
+            </div>
+        </div>
+
+        <header>
+            <h1 class="logo">SkyLore</h1>
+            <p class="subtitle">Minecraft Server</p>
+            <span class="status">WKRÓTCE <span class="loading"></span></span>
+        </header>
+
+        <div class="container">
+            <div class="content-grid">
+                <div class="card">
+                    <h2>🎮 O Serwerze</h2>
+                    <p>
+                        SkyLore to wyjątkowy serwer Minecraft, gdzie czekają na
+                        Ciebie niesamowite przygody! Przygotowujemy coś
+                        specjalnego dla wszystkich miłośników gry.
+                    </p>
+                    <p>
+                        Bądź częścią naszej społeczności i nie przegap startu
+                        serwera!
+                    </p>
+                    <div class="creeper"></div>
+                </div>
+
+                <div class="card">
+                    <h2>💬 Dołącz do Discord</h2>
+                    <p>
+                        Społeczność SkyLore już czeka na Ciebie! Dołącz do
+                        naszego serwera Discord, aby być na bieżąco z wszystkimi
+                        aktualnościami.
+                    </p>
+                    <div style="text-align: center; margin-top: 25px">
+                        <a
+                            href="https://discord.gg/YTZAvWFW2S"
+                            class="discord-link"
+                            target="_blank"
+                        >
+                            Dołącz do Discord
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📞 Kontakt</h2>
+                    <p><strong>Administrator:</strong> NIrevon</p>
+                    <p><strong>Email:</strong> nirevonkontakt@gmail.com</p>
+                    <p><strong>Discord:</strong> NIrevon</p>
+                    <p>Masz pytania? Skontaktuj się z nami!</p>
+                </div>
+            </div>
+
+            <div class="visitor-counter">
+                <h3>👥 Aktywność Strony</h3>
+                <div class="visitor-count" id="visitorCount">0</div>
+                <p style="color: #cccccc; margin-top: 10px">
+                    odwiedzin łącznie
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 SkyLore Minecraft Server</p>
+            <p>Strona stworzona z pasją dla społeczności Minecraft 🎮</p>
+        </footer>
+
+        <script>
+            // Modal functionality
+            function openModal(modalId) {
+                console.log("Opening modal:", modalId);
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = "block";
+                    document.body.style.overflow = "hidden";
+                }
+            }
+
+            function closeModal(modalId) {
+                console.log("Closing modal:", modalId);
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "auto";
+                    if (modalId === "recruitmentModal") {
+                        const quizResult =
+                            document.getElementById("quizResult");
+                        const recruitmentForm =
+                            document.getElementById("recruitmentForm");
+                        if (quizResult) quizResult.style.display = "none";
+                        if (recruitmentForm)
+                            recruitmentForm.style.display = "block";
+                    }
+                }
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function (event) {
+                if (event.target.classList.contains("modal")) {
+                    event.target.style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            };
+
+            // Add touch events for mobile
+            document.addEventListener("touchstart", function (event) {
+                if (event.target.classList.contains("modal")) {
+                    event.target.style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            });
+
+            // Show loading state
+            function setButtonLoading(button, loading = true) {
+                if (loading) {
+                    button.disabled = true;
+                    button.textContent = "Ładowanie...";
+                } else {
+                    button.disabled = false;
+                }
+            }
+
+            // Show error message
+            function showError(message, formElement) {
+                const existingError =
+                    formElement.querySelector(".error-message");
+                if (existingError) {
+                    existingError.remove();
+                }
+
+                const errorDiv = document.createElement("div");
+                errorDiv.className = "error-message";
+                errorDiv.style.cssText =
+                    "color: #ff4444; margin-top: 10px; padding: 10px; background: rgba(255, 68, 68, 0.1); border-radius: 5px; text-align: center;";
+                errorDiv.textContent = message;
+                formElement.appendChild(errorDiv);
+            }
+
+            // Show success message
+            function showSuccess(message, formElement) {
+                const existingMessages = formElement.querySelectorAll(
+                    ".error-message, .success-message",
+                );
+                existingMessages.forEach((msg) => msg.remove());
+
+                const successDiv = document.createElement("div");
+                successDiv.className = "success-message";
+                successDiv.style.cssText =
+                    "color: #00ff88; margin-top: 10px; padding: 10px; background: rgba(0, 255, 136, 0.1); border-radius: 5px; text-align: center;";
+                successDiv.textContent = message;
+                formElement.appendChild(successDiv);
+            }
+
+            // Login form handler (simplified for standalone)
+            document
+                .getElementById("loginForm")
+                .addEventListener("submit", async function (e) {
+                    e.preventDefault();
+                    const button = e.target.querySelector(".submit-btn");
+                    const originalText = button.textContent;
+
+                    try {
+                        setButtonLoading(button, true);
+
+                        const formData = new FormData(e.target);
+                        const loginData = Object.fromEntries(formData);
+
+                        // Simulate login (for standalone version)
+                        setTimeout(() => {
+                            showSuccess("Logowanie pomyślne!", e.target);
+
+                            // Store user data
+                            localStorage.setItem(
+                                "skylore_user",
+                                JSON.stringify({
+                                    username: loginData.username,
+                                    id: Math.random().toString(36).substr(2, 9),
+                                }),
+                            );
+
+                            setTimeout(() => {
+                                closeModal("loginModal");
+                                checkAuthState();
+                            }, 1500);
+                        }, 1000);
+                    } catch (error) {
+                        showError("Błąd logowania", e.target);
+                    } finally {
+                        setTimeout(() => {
+                            button.disabled = false;
+                            button.textContent = originalText;
+                        }, 1000);
+                    }
+                });
+
+            // Register form handler (simplified for standalone)
+            document
+                .getElementById("registerForm")
+                .addEventListener("submit", async function (e) {
+                    e.preventDefault();
+                    const button = e.target.querySelector(".submit-btn");
+                    const originalText = button.textContent;
+
+                    try {
+                        setButtonLoading(button, true);
+
+                        const formData = new FormData(e.target);
+                        const registerData = Object.fromEntries(formData);
+
+                        // Validate passwords match
+                        if (
+                            registerData.password !==
+                            registerData.confirmPassword
+                        ) {
+                            throw new Error("Hasła nie są identyczne");
+                        }
+
+                        // Simulate registration (for standalone version)
+                        setTimeout(() => {
+                            showSuccess(
+                                "Rejestracja pomyślna! Możesz się teraz zalogować.",
+                                e.target,
+                            );
+
+                            setTimeout(() => {
+                                closeModal("registerModal");
+                            }, 2000);
+                        }, 1000);
+                    } catch (error) {
+                        showError(error.message, e.target);
+                    } finally {
+                        setTimeout(() => {
+                            button.disabled = false;
+                            button.textContent = originalText;
+                        }, 1000);
+                    }
+                });
+
+            // Recruitment form handler
+            document
+                .getElementById("recruitmentForm")
+                .addEventListener("submit", async function (e) {
+                    e.preventDefault();
+                    const button = e.target.querySelector(".submit-btn");
+                    const originalText = button.textContent;
+
+                    try {
+                        setButtonLoading(button, true);
+
+                        // Check quiz answers first
+                        const correctAnswers = {
+                            q1: "b", // raid = skoordynowany atak
+                            q2: "b", // Manage Messages
+                            q3: "b", // czasowe odebranie możliwości pisania
+                            q4: "b", // !ban
+                            q5: "b", // grupy użytkowników z uprawnieniami
+                            q6: "c", // 28 dni
+                            q7: "b", // usunąć spam i ostrzec
+                        };
+
+                        let score = 0;
+                        const totalQuestions =
+                            Object.keys(correctAnswers).length;
+
+                        for (let question in correctAnswers) {
+                            const selectedAnswer = document.querySelector(
+                                `input[name="${question}"]:checked`,
+                            );
+                            if (
+                                selectedAnswer &&
+                                selectedAnswer.value ===
+                                    correctAnswers[question]
+                            ) {
+                                score++;
+                            }
+                        }
+
+                        const percentage = (score / totalQuestions) * 100;
+                        const passed = percentage >= 71; // Need 5/7 correct (71%)
+
+                        // Get form data
+                        const formData = new FormData(e.target);
+                        const recruitmentData = Object.fromEntries(formData);
+
+                        // Add quiz results
+                        recruitmentData.quizScore = score;
+                        recruitmentData.quizPercentage = percentage;
+
+                        // Show result
+                        const resultDiv = document.getElementById("quizResult");
+                        const formDiv =
+                            document.getElementById("recruitmentForm");
+
+                        if (passed) {
+                            // Send email notification using FormSubmit
+                            try {
+                                const emailContent = `
+NOWA APLIKACJA REKRUTACYJNA - SKYLORE DISCORD ADMIN
+
+=== DANE OSOBOWE ===
+Imię i nazwisko: ${recruitmentData.name}
+Wiek: ${recruitmentData.age} lat
+Discord: ${recruitmentData.discord}
+Dostępność: ${recruitmentData.availability}
+
+=== DOŚWIADCZENIE ===
+${recruitmentData.experience}
+
+=== MOTYWACJA ===
+${recruitmentData.motivation}
+
+=== WYNIK TESTU ===
+Wynik: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)
+Status: ZALICZONY ✅
+
+Test został zdany pomyślnie! Kandydat spełnia wymagania na administratora Discord.
+
+---
+Automatyczne powiadomienie z systemu rekrutacji SkyLore
+                        `.trim();
+
+                                // Create hidden form for email submission
+                                const form = document.createElement("form");
+                                form.style.display = "none";
+                                form.method = "POST";
+                                form.action =
+                                    "https://formsubmit.co/nirevonkontakt@gmail.com";
+
+                                const subjectInput =
+                                    document.createElement("input");
+                                subjectInput.type = "hidden";
+                                subjectInput.name = "_subject";
+                                subjectInput.value = `[SkyLore] Nowa aplikacja rekrutacyjna - ${recruitmentData.name}`;
+
+                                const messageInput =
+                                    document.createElement("input");
+                                messageInput.type = "hidden";
+                                messageInput.name = "message";
+                                messageInput.value = emailContent;
+
+                                const nameInput =
+                                    document.createElement("input");
+                                nameInput.type = "hidden";
+                                nameInput.name = "name";
+                                nameInput.value = recruitmentData.name;
+
+                                const nextInput =
+                                    document.createElement("input");
+                                nextInput.type = "hidden";
+                                nextInput.name = "_next";
+                                nextInput.value = window.location.href;
+
+                                form.appendChild(subjectInput);
+                                form.appendChild(messageInput);
+                                form.appendChild(nameInput);
+                                form.appendChild(nextInput);
+
+                                document.body.appendChild(form);
+
+                                // Submit form after a short delay to show the result first
+                                setTimeout(() => {
+                                    form.submit();
+                                }, 2000);
+                            } catch (emailError) {
+                                console.log("Email sending error:", emailError);
+                                // Continue with success message even if email fails
+                            }
+
+                            resultDiv.innerHTML = `
+                        <div class="quiz-result quiz-pass">
+                            <h3>🎉 Gratulacje!</h3>
+                            <p>Twój wynik: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</p>
+                            <p>Przeszedłeś test! Aplikacja została wysłana pomyślnie na nirevonkontakt@gmail.com<br>
+                            Skontaktujemy się z Tobą wkrótce na Discord: ${recruitmentData.discord}</p>
+                            <button onclick="closeModal('recruitmentModal')" class="submit-btn" style="margin-top: 15px;">
+                                Zamknij
+                            </button>
+                        </div>
+                    `;
+                        } else {
+                            resultDiv.innerHTML = `
+                        <div class="quiz-result quiz-fail">
+                            <h3>😔 Niestety...</h3>
+                            <p>Twój wynik: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</p>
+                            <p>Nie osiągnąłeś wymaganego wyniku (71%). Spróbuj ponownie po przestudiowaniu materiałów o moderacji Discord.</p>
+                            <button onclick="closeModal('recruitmentModal')" class="submit-btn" style="margin-top: 15px;">
+                                Spróbuj ponownie
+                            </button>
+                        </div>
+                    `;
+                        }
+
+                        formDiv.style.display = "none";
+                        resultDiv.style.display = "block";
+                    } catch (error) {
+                        showError(error.message, e.target);
+                    } finally {
+                        button.disabled = false;
+                        button.textContent = originalText;
+                    }
+                });
+
+            // Create animated particles
+            function createParticles() {
+                const particlesContainer = document.querySelector(".particles");
+
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement("div");
+                    particle.classList.add("particle");
+
+                    particle.style.left = Math.random() * 100 + "%";
+                    particle.style.top = Math.random() * 100 + "%";
+                    particle.style.animationDelay = Math.random() * 6 + "s";
+                    particle.style.animationDuration =
+                        Math.random() * 3 + 3 + "s";
+
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            // Create Creeper pixel art
+            function createCreeper() {
+                const creeper = document.querySelector(".creeper");
+
+                const head = document.createElement("div");
+                head.classList.add("creeper-head");
+
+                const leftEye = document.createElement("div");
+                leftEye.classList.add("creeper-eye", "left");
+                const rightEye = document.createElement("div");
+                rightEye.classList.add("creeper-eye", "right");
+
+                const mouth = document.createElement("div");
+                mouth.classList.add("creeper-mouth");
+
+                head.appendChild(leftEye);
+                head.appendChild(rightEye);
+                head.appendChild(mouth);
+
+                const body = document.createElement("div");
+                body.classList.add("creeper-body");
+
+                creeper.appendChild(head);
+                creeper.appendChild(body);
+            }
+
+            // Visitor counter functionality
+            function initVisitorCounter() {
+                const totalVisitorsKey = "skylore_total_visitors";
+
+                let totalVisitors = parseInt(
+                    localStorage.getItem(totalVisitorsKey) || "0",
+                );
+
+                if (!sessionStorage.getItem("skylore_visited_ever")) {
+                    totalVisitors += 1;
+                    localStorage.setItem(
+                        totalVisitorsKey,
+                        totalVisitors.toString(),
+                    );
+                    sessionStorage.setItem("skylore_visited_ever", "true");
+                }
+
+                const countElement = document.getElementById("visitorCount");
+                if (countElement) {
+                    animateCounter(countElement, totalVisitors);
+                }
+            }
+
+            function animateCounter(element, target) {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current);
+                }, 30);
+            }
+
+            // Logout function
+            function logout() {
+                localStorage.removeItem("skylore_user");
+                location.reload();
+            }
+
+            // Check if user is logged in
+            function checkAuthState() {
+                const user = JSON.parse(
+                    localStorage.getItem("skylore_user") || "null",
+                );
+                const authSection = document.getElementById("authSection");
+                const userSection = document.getElementById("userSection");
+                const welcomeText = document.getElementById("welcomeText");
+
+                if (user) {
+                    authSection.style.display = "none";
+                    userSection.style.display = "flex";
+                    welcomeText.textContent = `Witaj, ${user.username}!`;
+                } else {
+                    authSection.style.display = "flex";
+                    userSection.style.display = "none";
+                }
+            }
+
+            // Initialize when page loads
+            document.addEventListener("DOMContentLoaded", function () {
+                createParticles();
+                createCreeper();
+                initVisitorCounter();
+                checkAuthState();
+            });
+        </script>
+    </body>
+</html>
